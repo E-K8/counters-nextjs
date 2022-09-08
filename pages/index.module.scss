@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.counterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.counter {
+  margin: 0 1rem 1rem 1rem;
+  padding: 2rem 2rem;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(35deg, #020024 0%, #09794e 35%, #00d4ff 100%);
+  .count {
+    background-color: #fff;
+    color: #000000;
+    font-size: 2rem;
+    width: 6rem;
+    padding: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .resetButton {
+    font-size: 1.25rem;
+  }
+}
+
+.button {
+  font-size: 2rem;
+  padding: 0.3rem 0.6rem;
+  min-width: 6rem;
+  background-color: #020024;
+  margin-bottom: 0.6rem;
+  border-radius: 0.3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  cursor: pointer;
+}
