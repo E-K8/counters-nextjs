@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import styles from './index.module.scss';
 
-const Counter = ({ count, setCount }) => (
+const Counter = ({ count, resetCounter, incrementCounter }) => (
   <div className={styles.counter}>
     <div className={styles.count}>{count} </div>
-    <div className={styles.button} onClick={() => setCount(count + 1)}>
+    <div className={styles.button} onClick={incrementCounter}>
       +
     </div>
     <div
       className={`${styles.button}+${styles.resetButton}`}
-      onClick={() => setCount(0)}
+      onClick={resetCounter}
     >
       RESET
     </div>
@@ -19,9 +19,21 @@ const Counter = ({ count, setCount }) => (
 export default function Home() {
   const [count, setCount] = useState(0);
 
+  const resetCounter = () => {
+    setCount(0);
+  };
+
+  const incrementCounter = () => {
+    setCount(count + 1);
+  };
+
   return (
     <div className={styles.container}>
-      <Counter count={count} setCount={setCount} />
+      <Counter
+        count={count}
+        resetCounter={resetCounter}
+        incrementCounter={incrementCounter}
+      />
     </div>
   );
 }
