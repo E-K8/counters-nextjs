@@ -8,7 +8,7 @@ const Counter = ({ count, id, resetCounter, incrementCounter }) => (
       +
     </div>
     <div
-      className={`${styles.button}+${styles.resetButton}`}
+      className={`${styles.button} ${styles.resetButton}`}
       onClick={() => resetCounter(id)}
     >
       RESET
@@ -25,27 +25,20 @@ export default function Home() {
     return id;
   };
 
-  const resetCounter = (id) => {
+  const updateCounter = (id, updateFunction) => {
     const updatedCounters = countersData.map((data) => {
       if (data.id !== id) {
         return data;
       } else {
-        return { ...data, count: 0 };
+        return { ...data, count: updateFunction(data.count) };
       }
     });
     setCountersData(updatedCounters);
   };
 
-  const incrementCounter = (id) => {
-    const updatedCounters = countersData.map((data) => {
-      if (data.id !== id) {
-        return data;
-      } else {
-        return { ...data, count: data.count + 1 };
-      }
-    });
-    setCountersData(updatedCounters);
-  };
+  const resetCounter = (id) => updateCounter(id, (count) => 0);
+
+  const incrementCounter = (id) => updateCounter(id, (count) => count + 1);
 
   const addCounter = (id) => {
     setCountersData([
@@ -57,15 +50,26 @@ export default function Home() {
     ]);
   };
 
+  const resetAllCounters = () => {
+    const updatedData = countersData.map((data) => ({
+      ...data,
+      count: 0,
+    }));
+    setCountersData(updatedData);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.button} onClick={addCounter}>
         ADD COUNTER
       </div>
+      <div className={styles.button} onClick={resetAllCounters}>
+        RESET ALL
+      </div>
       <div className={styles.countersContainer}>
         {countersData.map((data) => (
           <Counter
-            {...data}
+            {...data} // BUG gives false error about missing key prop, possibly eslint needs extra configuring
             resetCounter={resetCounter}
             incrementCounter={incrementCounter}
           />
