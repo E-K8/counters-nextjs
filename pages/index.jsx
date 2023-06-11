@@ -45,7 +45,7 @@ export default function Home() {
       ...countersData,
       {
         count: 0,
-        id: generateId,
+        id: generateId(),
       },
     ]);
   };
@@ -69,6 +69,7 @@ export default function Home() {
       <div className={styles.countersContainer}>
         {countersData.map((data) => (
           <Counter
+            key={data.id}
             {...data} // BUG gives false error about missing key prop, possibly eslint needs extra configuring
             resetCounter={resetCounter}
             incrementCounter={incrementCounter}
